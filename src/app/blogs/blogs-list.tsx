@@ -3,6 +3,11 @@ import { getBlogsPaginated } from "@/actions/blog"
 
 // Next
 import Image from "next/image"
+import Link from "next/link"
+
+// Others lib
+import { formatDate } from "@/utils/format-date"
+
 
 export default async function BlogsList(
     {currentPage, pageSize, query} :
@@ -21,15 +26,21 @@ export default async function BlogsList(
             <div>
                 {blogs?.map((blog) => (
                     <div key={blog.id}>
-                        <Image
-                            src={blog.cover}
-                            alt={blog.title}
-                            width={400}
-                            height={200}
-                        />
+                        <Link
+                            href={`/blogs/${blog.slug}`}
+                        >
+                            <Image
+                                src={blog.cover}
+                                alt={blog.title}
+                                width={400}
+                                height={200}
+                            />
+                        </Link>
                         <p>{blog.title}</p>
-                        <p>{blog.resume}</p>
-                        <p>{`${blog.createdAt}`}</p>
+                        <div
+                            dangerouslySetInnerHTML={{ __html: blog.resume}}
+                        />
+                        <p>{formatDate(blog.createdAt)}</p>
                         <p>{blog.category}</p>
                     </div>
                 ))}

@@ -4,6 +4,9 @@ import { getBlogBySlug } from '@/actions/blog'
 // Next
 import Image from 'next/image'
 
+// Others lib
+import { formatDate } from '@/utils/format-date'
+
 
 export default async function BlogContent(
     {slug}: {slug: string}
@@ -28,9 +31,9 @@ export default async function BlogContent(
 
             <div>
                 <p>{blog.title}</p>
-                <p>{`${blog.createdAt}`}</p>
+                <p>{formatDate(blog.createdAt)}</p>
                 <p>{blog.category}</p>
-                <p>{blog.content}</p>
+                <div dangerouslySetInnerHTML={{ __html: blog.content }} />
             </div>
         </div>
     )
