@@ -2,9 +2,9 @@
 import React, { Suspense } from 'react'
 
 // Components
-import BlogsList from './blogs-list'
+import ArticlesList from './articles-list'
 
-export default async function Blogs(
+export default async function Articles(
   {searchParams} :
   {searchParams: Promise<{query?: string, page: string}>}
 ) {
@@ -19,7 +19,7 @@ export default async function Blogs(
         <h1>Liste des articles</h1>
 
         <Suspense fallback={<p>Chargement...</p>}>
-          <BlogsList
+          <ArticlesList
             currentPage={currentPage}
             pageSize={pageSize}
             query={query}

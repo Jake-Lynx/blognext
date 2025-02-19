@@ -8,21 +8,21 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
 // Actions
-import { creerBlog, modifierBlog } from '@/actions/blog'
+import { creerArticle, modifierArticle } from '@/actions/article'
 import {generateContentAI} from '@/actions/googleAI'
 
 // Others lib
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {CldUploadWidget} from 'next-cloudinary'
-import { BlogFormProps, CoverUploadProps } from '@/utils/definition'
-import { blogSchema, blogSchemaValues } from '@/utils/schema'
+import { ArticleFormProps, CoverUploadProps } from '@/utils/definition'
+import { articleSchema, articleSchemaValues } from '@/utils/schema'
 import toast from 'react-hot-toast'
 import { generateUnsplashImage } from '@/actions/unsplash'
 
 
-export default function BlogForm(
-    {mode = 'create', initialData}: BlogFormProps
+export default function ArticleForm(
+    {mode = 'create', initialData}: ArticleFormProps
 ) {
     const router = useRouter()
 
@@ -41,8 +41,8 @@ export default function BlogForm(
         getValues,
         reset,
         control,
-    } = useForm<blogSchemaValues>({
-        resolver: zodResolver(blogSchema),
+    } = useForm<articleSchemaValues>({
+        resolver: zodResolver(articleSchema),
         defaultValues: initialData
     })
 
@@ -52,7 +52,7 @@ export default function BlogForm(
 
         try {
             const {categories} = await generateContentAI(`
-                Suggest in french a list of 20 popular and relevant categories for a blogging application, considering current trends and the most searched topics. Ensure the categories cover various fields such as technology, lifestyle, gastronomy, travel, and more.
+                Suggest in french a list of 20 popular and relevant categories for a articleging application, considering current trends and the most searched topics. Ensure the categories cover various fields such as technology, lifestyle, gastronomy, travel, and more.
                 No text between parentheses.
                 Please return the response in JSON format like this:
                 {
@@ -86,9 +86,16 @@ export default function BlogForm(
 
         try {
             const {titles} = await generateContentAI(`
-                Generate in french 3 SEO-optimized blog post titles for the category '${category}'.
+                Generate in french 7 SEO-optimized article post titles for the category '${category}'.
                 The titles should be engaging, attractive, and based on current trends to maximize organic traffic.
                 Use relevant keywords and a tone that encourages clicks.
+                If you encounter this format in the generation: "[Critique] *[term of variable1/variable2]* : ... [variable1/variable2]? Our Complete Review!"  
+                    1. This process only applies if the given format is followed.
+                    2. First, choose whether the title should refer to variable1 or variable2.
+                    3. If you choose variable1, replace "[Name of variable1]" with something real and trendy related to ${category}.
+                    4. If you choose variable2, replace "[Name of variable2]" with something real and trendy related to ${category}.
+                    5. Use real trendy titles related to ${category}.
+
                 Return the response in JSON format like this:
                 {
                     "titles": ["Title 1", "Title 2", "Title 3"]
@@ -121,7 +128,7 @@ export default function BlogForm(
 
         try {
             const {content} = await generateContentAI(`
-                Generate in french an SEO-optimized blog post on the topic: ${title}. The content should be written in a clear, engaging, and easy-to-understand language suitable for a broad audience. It must follow best SEO practices and incorporate relevant keywords, while remaining pleasant and readable for human readers."
+                Generate in french an SEO-optimized article post on the topic: ${title}. The content should be written in a clear, engaging, and easy-to-understand language suitable for a broad audience. It must follow best SEO practices and incorporate relevant keywords, while remaining pleasant and readable for human readers."
 
                 🔹 Key Criteria:
 
@@ -200,7 +207,7 @@ export default function BlogForm(
     }
 
     // Gestion de la validation du formulaire
-    const onSubmit = async (data: blogSchemaValues) => {
+    const onSubmit = async (data: articleSchemaValues) => {        
         try {
             const formData = new FormData()
             Object.entries(data).forEach(([key, value]) => {
@@ -210,9 +217,9 @@ export default function BlogForm(
 
             if (mode === 'edit' && initialData?.id) {
                 formData.append('id', initialData.id)
-                response = await modifierBlog(initialData.id, formData)
+                response = await modifierArticle(initialData.id, formData)
             } else {
-                response = await creerBlog(formData)
+                response = await creerArticle(formData)
             }
 
             // Afficher une notification en cas d'erreur
@@ -235,7 +242,7 @@ export default function BlogForm(
             }
 
             // redirection vers la liste des articles
-            router.push('/dashboard/blogs')
+            router.push('/dashboard/articles')
 
         } catch (error) {
             console.log(error)

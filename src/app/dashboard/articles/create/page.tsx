@@ -1,18 +1,18 @@
-import BlogForm from '@/components/form/blog-form'
+import ArticleForm from '@/components/form/article-form'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
 
-export default function BlogOperation() {
+export default function ArticleOperation() {
   return (
     <div>
       <p>
-        <Link href='/dashboard/blogs'>
+        <Link href='/dashboard/articles'>
           Retour 
         </Link>
       </p>
 
       <Suspense fallback={<p>Chargement...</p>}>
-        <BlogForm mode='create'/>
+        <ArticleForm mode='create'/>
       </Suspense>
     </div>
   )

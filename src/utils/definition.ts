@@ -1,6 +1,6 @@
-import { blogSchemaWithIdValues } from "./schema";
+import { articleSchemaWithIdValues } from "./schema";
 
-export type BlogProps = {
+export type ArticleProps = {
     id: string;
     title: string;
     slug?: string;
@@ -17,7 +17,7 @@ export type CoverUploadProps = {
     } | string
 }
 
-export interface BlogFormProps {
+export interface ArticleFormProps {
     mode?: 'create' | 'edit';
-    initialData?: blogSchemaWithIdValues
+    initialData?: articleSchemaWithIdValues
 }

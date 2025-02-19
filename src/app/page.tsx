@@ -2,7 +2,7 @@
 import { Suspense } from "react";
 
 // Components
-import BlogsLatest from "@/components/blogs/blogs-latest";
+import ArticlesLatest from "@/components/articles/articles-latest";
 import Link from "next/link";
 
 
@@ -13,7 +13,7 @@ export default function Home() {
       <Link href='/dashboard'>Admin</Link>
 
       <Suspense fallback={<p>Chargement...</p>}>
-        <BlogsLatest />
+        <ArticlesLatest />
       </Suspense>
     </div>  
   );
