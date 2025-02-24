@@ -7,7 +7,7 @@ export function Logo() {
         <Link href="/" className="flex items-center">
             <span className="text-xl md:text-2xl font-bold text-teal-500">
                 <Image
-                    src='/logo.jpeg'
+                    src='/logo.png'
                     alt="logo de l'application"
                     width={80}
                     height={80}
