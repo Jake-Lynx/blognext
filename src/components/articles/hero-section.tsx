@@ -28,6 +28,8 @@ export default function HeroSection(
                                     width={25}
                                     height={25} 
                                     className="block rounded-full"
+                                    loading="lazy"
+                                    quality={75}
                                 />
                                 <div className="flex justify-center items-center gap-2 text-gray-500">
                                     <p className="font-medium hover:text-teal-500">
@@ -54,6 +56,8 @@ export default function HeroSection(
                                 alt={`image de l'article ${article.title}`}
                                 fill
                                 className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                                quality={75}
                             />
                         </div>
                     </article>

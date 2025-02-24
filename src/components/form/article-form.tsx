@@ -147,7 +147,7 @@ export default function ArticleForm(
                     HTML Structure:
 
                         - Use HTML to structure the content, excluding unnecessary tags like body, head, main, etc.
-                        - Only include essential tags for the structure: h1, h2, h3, p, ul, ol, li, blockquote, code (if applicable), etc.
+                        - Only include essential tags for the structure: h1, h2, h3, p, ul, ol, li, blockquote, code (only if applicable, for example in article about technology), etc.
                         - Use <h1> for the main title and <h2>, <h3> for subheadings. Ensure the title hierarchy is consistent.
 
                     SEO and Accessibility:

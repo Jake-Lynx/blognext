@@ -23,6 +23,8 @@ export function FeaturedArticle(
             width={1200}
             height={600}
             className="w-full object-cover aspect-[2/1]"
+            loading="lazy"
+            quality={75}  // Réduit la taille de l'image
           />
         </div>
       </Link>
