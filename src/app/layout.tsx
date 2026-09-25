@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   description: "Blogger 3x plus vite grâce à l'IA",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: Readonly<{
